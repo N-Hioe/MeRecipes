@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,16 +9,16 @@
   <title>Create Recipe</title>
 </head>
 <body>
-  <%- include('../views/partials/homeNav'); %>
-  <div class="container mt-5">
-    <h1>Create a New Recipe</h1>
-
-    <form method="POST" action="/recipe/create" id="recipeForm" enctype="multipart/form-data">
-      <%- include ('../views/partials/createRecipeForm') ; %>    
-
-      <button type="submit" class="btn btn-primary mt-3">Create Recipe</button>
-    </form>
-  </div>
-    <script src="/javascripts/recipeForm.js"></script>
-  </body>
+    <%- include('../views/partials/homeNav'); %>
+    <main>
+        <div class="album py-5 bg-body-tertiary">
+            <div class="container-fluid" id="recipes-container">
+            </div>
+        </div>
+    </main>
+    <script>
+        const recipesData = <%- JSON.stringify(recipes) %>;
+    </script>
+    <script src="/javascripts/recipeGallery.js"></script>
+</body>
 </html>

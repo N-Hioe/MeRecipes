@@ -5,9 +5,8 @@ CREATE TABLE recipes (
     recipeDescription TEXT NOT NULL,
     tags JSON,
     ingredients JSON NOT NULL,
-    steps JSON NOT NULL
+    steps JSON NOT NULL,
+    file_src TEXT NOT NULL
 );
 --@block
-DROP TABLE recipes --@block
-SELECT *
-from recipes -- @block
+DROP TABLE recipes

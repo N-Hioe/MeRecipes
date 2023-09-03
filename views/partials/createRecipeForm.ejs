@@ -1,0 +1,100 @@
+<div class="mb-3">
+    <label for="recipeName" class="form-label">Recipe Name:</label>
+    <input type="text" id="recipeName" name="recipeName" class="form-control" required>
+  </div>
+
+  <!-- Tags -->
+  <div class="mb-3 row">
+    <label for="tags" class="form-label">Tags:</label>
+    <div class="col-2">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="vegetarian" name="tags[]" value="vegetarian">
+        <label class="form-check-label" for="vegetarian">Vegetarian</label>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="vegan" name="tags[]" value="vegan">
+        <label class="form-check-label" for="vegan">Vegan</label>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="dairy-free" name="tags[]" value="dairy-free">
+        <label class="form-check-label" for="dairy-free">Dairy-Free</label>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gluten-free" name="tags[]" value="gluten-free">
+        <label class="form-check-label" for="gluten-free">Gluten-Free</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image -->
+  <div class="mb-3">
+    <label for="imageFile" class="form-label">Recipe Thumbnail:</label>
+    <input class="form-control" type="file" id="imageFile" name="imageFile" accept="image/*" required>
+  </div>
+
+  <!-- Description -->
+  <div class="mb-3">
+    <label for="description" class="form-label">Description:</label>
+    <textarea class="form-control" name="description" id="description" rows="4" required></textarea>
+  </div>
+
+    <!-- Ingredients -->
+  <div id="ingredientsContainer" class="flex">
+      <div>
+        <label class="form-label">Ingredients:</label>
+      </div>
+      <div class="mb-2">
+        <button type="button" class="btn btn-success" id="addIngredientButton">Add Ingredient
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+          </svg>
+        </button>
+      </div>
+    
+      <div class="input-group mb-2">
+        <input type="number" name="ingredientQuantities[]" class="form-control" required>
+        <select name="ingredientUnits[]" class="form-select">
+          <option value="count">count</option>
+          <option value="grams">grams</option>
+          <option value="ounces">ounces</option>
+          <option value="cups">cups</option>
+        </select>
+        <input type="text" name="ingredients[]" class="form-control" required>
+        <button type="button" class="btn btn-danger removeButton" disabled>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+              <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+
+  <div id="stepsContainer" class="flex">
+    <div>
+      <label class="form-label">Steps:</label>
+    </div>
+    <div class="mb-2">
+      <button type="button" class="btn btn-success" id="addStepButton">Add Step
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+        </svg>
+      </button>
+    </div>
+  
+    <!-- Steps -->
+    <div class="input-group mb-2">
+      <input type="text" name="steps[]" class="form-control" required>
+      <button type="button" class="btn btn-danger removeButton" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  
