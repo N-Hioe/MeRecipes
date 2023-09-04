@@ -10,8 +10,69 @@
 </head>
 <body>
     <%- include('../views/partials/homeNav'); %>
+    
     <main>
-        <div class="album py-5 bg-body-tertiary">
+        <div class="album py-1 bg-body-tertiary">
+            <div class="py-2 my-2 px-2 mx-2">
+                <input id="search-bar" type="text" class="form-control rounded-left py-2" placeholder="Search">
+            </div>
+            <div class="py-2 my-2 px-2 mx-2 flex">
+                <div class="mb-3 row">
+                    <label for="prep-times" class="form-label">Preparation Times:</label>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="prep-time-30" name="prep-times" value="30">
+                            <label class="form-check-label" for="prep-time-30">&lt; 30 min</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="prep-time-60" name="prep-times" value="60">
+                            <label class="form-check-label" for="prep-time-60">&lt; 60 min</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="prep-time-90" name="prep-times" value="90">
+                            <label class="form-check-label" for="prep-time-90">&lt; 90 min</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="prep-time-120" name="prep-times" value="120">
+                            <label class="form-check-label" for="prep-time-120">&lt; 120 min</label>
+                        </div>
+                    </div>
+                </div>
+                    
+                <div class="mb-3 row">
+                    <label for="tags" class="form-label">Tags:</label>
+                    <div class="col-2">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="vegetarian" name="tags[]" value="vegetarian">
+                        <label class="form-check-label" for="vegetarian">Vegetarian</label>
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="vegan" name="tags[]" value="vegan">
+                        <label class="form-check-label" for="vegan">Vegan</label>
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="dairy-free" name="tags[]" value="dairy-free">
+                        <label class="form-check-label" for="dairy-free">Dairy-Free</label>
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gluten-free" name="tags[]" value="gluten-free">
+                        <label class="form-check-label" for="gluten-free">Gluten-Free</label>
+                      </div>
+                    </div>
+                </div>
+            </div>
             <div class="container-fluid" id="recipes-container">
             </div>
         </div>

@@ -20,12 +20,15 @@ detailsColumn.classList.add('col-md-6', 'p-4');
 const recipeTitle = document.createElement('h1');
 recipeTitle.textContent = recipeData.recipeName;
 
+const recipeTime = document.createElement('p');
+recipeTime.textContent = 'Preparation Time: ' + recipeData.recipeTime + ' minutes';
+
 const recipeDescription = document.createElement('p');
 recipeDescription.textContent = recipeData.recipeDescription;
 
 const tagsHeading = document.createElement('h2');
 tagsHeading.classList.add('display-6');
-tagsHeading.textContent = 'Tags:';
+tagsHeading.textContent = 'Dietary Restrictions:';
 
 const tagsList = document.createElement('ul');
 tagsList.classList.add('list-group', 'mb-4');
@@ -71,6 +74,7 @@ mainRow.appendChild(imageColumn);
 container.appendChild(mainRow);
 
 detailsColumn.appendChild(recipeTitle);
+detailsColumn.appendChild(recipeTime);
 detailsColumn.appendChild(recipeDescription);
 detailsColumn.appendChild(tagsHeading);
 detailsColumn.appendChild(tagsList);
@@ -194,6 +198,10 @@ function setExistingFields() {
     // Set existing description
     const description = document.getElementById('description');
     description.value = recipeData.recipeDescription;
+
+    // Set existing time
+    const time = document.getElementById('recipeTime');
+    time.value = recipeData.recipeTime;
 
     // Set existing ingredients
     const ingredients = recipeData.ingredients;

@@ -116,6 +116,7 @@ function getRecipeReqData(req) {
     const recipeName = req.body.recipeName;
     const description = req.body.recipeName;
     const tags = req.body.tags;
+    const recipeTime = req.body.recipeTime;
     const ingredientQuantities = req.body.ingredientQuantities;
     const ingredientUnits = req.body.ingredientUnits;
     const ingredientNames = req.body.ingredients;
@@ -126,6 +127,7 @@ function getRecipeReqData(req) {
         recipeName,
         description,
         tags,
+        recipeTime,
         ingredients: [],
         steps,
         image: null,
@@ -152,8 +154,8 @@ function getRecipeReqData(req) {
 // Insert Recipe
 async function insertRecipe(recipeData) {
     await pool.query(
-        'INSERT INTO recipes (id, recipeName, recipeDescription, tags, ingredients, steps, file_src) VALUES (?, ?, ?, ?, ?, ?, ?)',
-        [recipeData.id, recipeData.recipeName, recipeData.description, JSON.stringify(recipeData.tags), JSON.stringify(recipeData.ingredients), JSON.stringify(recipeData.steps), recipeData.image || null]
+        'INSERT INTO recipes (id, recipeName, recipeDescription, tags, recipeTime, ingredients, steps, file_src) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+        [recipeData.id, recipeData.recipeName, recipeData.description, JSON.stringify(recipeData.tags), recipeData.recipeTime, JSON.stringify(recipeData.ingredients), JSON.stringify(recipeData.steps), recipeData.image || null]
     );
 }
 
@@ -203,10 +205,11 @@ async function editRecipe(recipeData) {
     SET recipeName = ?,
         recipeDescription = ?,
         tags = ?,
+        recipeTime = ?,
         ingredients = ?,
         steps = ?,
         file_src = ?
-    WHERE id = ?`, [recipeData.recipeName, recipeData.description, JSON.stringify(recipeData.tags), JSON.stringify(recipeData.ingredients), JSON.stringify(recipeData.steps), recipeData.image, recipeData.id,])
+    WHERE id = ?`, [recipeData.recipeName, recipeData.description, JSON.stringify(recipeData.tags), recipeData.recipeTime, JSON.stringify(recipeData.ingredients), JSON.stringify(recipeData.steps), recipeData.image, recipeData.id,])
 }
 
 
