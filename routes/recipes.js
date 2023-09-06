@@ -40,7 +40,8 @@ router.post('/create', upload.single('imageFile'), async (req, res) => {
 
     try {
         await insertRecipe(recipeData);
-        res.status(200).json({ message: 'Recipe created successfully', recipeData });
+        const recipes = await getRecipes();
+        res.status(200).redirect('/recipe/list');
     } catch(error) {
         console.log('Error inserting recipe', error);
         res.status(500).json({ error: 'Failed to create recipe' });
@@ -51,8 +52,7 @@ router.post('/create', upload.single('imageFile'), async (req, res) => {
 // GET /recipe/list - Display a list of all recipes
 router.get('/list', async (req, res) => {
     const recipes = await getRecipes();
-    // console.log(recipes);
-    res.render('viewRecipeGallery', { recipes });
+    res.status(200).render('viewRecipeGallery', { recipes });
 });
 
 // GET /recipe/:id - Display details of a specific recipe
@@ -87,7 +87,7 @@ router.delete('/:id', async (req, res) => {
 
 // POST /recipe/edit/:id - Edit recipe
 router.post('/edit/:id', upload.single('imageFile'), async (req, res) => {
-    const recipeData = getRecipeReqData(req)
+    const recipeData = getRecipeReqData(req);
     try {
         // Delete image from file system
         await deleteImage(recipeData.id)
@@ -114,7 +114,7 @@ function getRecipeReqData(req) {
         recipeId = uuid.v4();
     }
     const recipeName = req.body.recipeName;
-    const description = req.body.recipeName;
+    const description = req.body.description;
     const tags = req.body.tags;
     const recipeTime = req.body.recipeTime;
     const ingredientQuantities = req.body.ingredientQuantities;
@@ -180,10 +180,6 @@ async function deleteRecipe(id) {
 async function deleteImage(recipeId) {
     const [rows] = await pool.query('SELECT file_src FROM recipes WHERE id = ?', [recipeId]);
 
-    if (rows.length === 0) {
-        return res.status(404).json({ error: 'Recipe not found' });
-    }
-
     const image = rows[0].file_src;
 
     // Delete image in file system
@@ -209,7 +205,7 @@ async function editRecipe(recipeData) {
         ingredients = ?,
         steps = ?,
         file_src = ?
-    WHERE id = ?`, [recipeData.recipeName, recipeData.description, JSON.stringify(recipeData.tags), recipeData.recipeTime, JSON.stringify(recipeData.ingredients), JSON.stringify(recipeData.steps), recipeData.image, recipeData.id,])
+    WHERE id = ?`, [recipeData.recipeName, recipeData.description, JSON.stringify(recipeData.tags), recipeData.recipeTime, JSON.stringify(recipeData.ingredients), JSON.stringify(recipeData.steps), recipeData.image, recipeData.id])
 }
 
 

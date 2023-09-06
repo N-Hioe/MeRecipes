@@ -84,7 +84,7 @@ detailsColumn.appendChild(stepsHeading);
 detailsColumn.appendChild(stepsList);
 
 const editButton = document.createElement('button');
-editButton.classList.add('btn', 'btn-primary', 'mb-4');
+editButton.classList.add('btn', 'btn-primary');
 editButton.setAttribute('data-bs-toggle', 'modal'); 
 editButton.setAttribute('data-bs-target', '#editRecipeModal');
 editButton.textContent = 'Edit Recipe';

@@ -8,20 +8,20 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container d-flex flex-column justify-content-center align-items-center vh-100 bg-light">
-        <header class="text-center mb-5">
-            <h1 class="display-2">MeRecipes</h1>
-        </header>
-
-        <!-- Placeholder for an image -->
-        <img src="your-image-url.jpg" alt="App Logo" class="img-fluid mb-4">
-
-        <main class="text-center flex flex-column">
-            <div>
-                <a href="/recipe/create" class="btn btn-primary">Create Recipe</a>
-            </div class="my-1">
-            <div class="my-1">
-                <a href="/recipe/list" class="btn btn-success">View Recipes</a>
+    <div class="container-fluid d-flex flex-column justify-content-center align-items-center min-vh-100 bg-light">    
+        <main class="text-center">
+            <img src="/images/MeRecipesLogo.svg" alt="App Logo" class="img-fluid mb-4 rounded-circle" style="max-width: 400px;">
+            <div class="my-3">
+                <a href="/recipe/create" class="btn btn-primary btn-lg">Create Recipe</a>
+            </div>
+            <div class="my-3">
+                <a href="/recipe/list" class="btn btn-success btn-lg">View Recipes</a>
+            </div>
+            <div class="my-3">
+                <a href="/grocery/create" class="btn btn-primary btn-lg">Create Grocery List</a>
+            </div>
+            <div class="my-3">
+                <a href="/grocery/list" class="btn btn-success btn-lg">View Grocery Lists</a>
             </div>
             <p class="mt-4">Manage your recipes and create grocery lists easily!</p>
         </main>

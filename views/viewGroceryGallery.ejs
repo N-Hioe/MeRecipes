@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <title>Grocery Lists</title>
+</head>
+<body>
+    <%- include('../views/partials/homeNav'); %>
+    
+    <main>
+        <div class="album py-1 bg-body-tertiary">
+            <div class="py-2 my-2 px-2 mx-2">
+                <input id="search-bar" type="text" class="form-control rounded-left py-2" placeholder="Search">
+            </div>
+            
+            <!-- Display grocery lists here -->
+            <div class="container-fluid" id="grocery-lists-container">
+            </div>
+            
+            <div id="pagination-container" class="text-center mt-4"></div>
+        </div>
+    </main>
+    <script>
+        const groceryListsData = <%- JSON.stringify(groceryLists) %>;
+    </script>
+    <!-- Add JavaScript file for handling grocery lists, similar to recipeGallery.js -->
+    <script src="/javascripts/groceryGallery.js"></script>
+</body>
+</html>

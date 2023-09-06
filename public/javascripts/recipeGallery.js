@@ -1,24 +1,53 @@
 console.log(recipesData);
 
+const recipesPerPage = 9;
+let currentPage = 1;
+
 const tagsFilters = document.querySelectorAll('input[type="checkbox"][name="tags[]"]');
 
 const prepTimeFilters = document.querySelectorAll('input[type="radio"][name="prep-times"]');
-console.log(prepTimeFilters);
 
 const searchBar = document.getElementById('search-bar');
 
-prepTimeFilters.forEach(time => {
-    time.addEventListener('change', updateFilter);
-});
+if (!recipesData[0]) {
+    renderEmptyRecipes();
+} else {
+    // Initial filter
+    updateFilter();
+    prepTimeFilters.forEach(time => {
+        time.addEventListener('change', updateFilter);
+    });
+    tagsFilters.forEach(tag => {
+        tag.addEventListener('change', updateFilter);
+    });
+    searchBar.addEventListener('input', updateFilter);
+}
 
-tagsFilters.forEach(tag => {
-    tag.addEventListener('change', updateFilter);
-});
+function renderEmptyRecipes() {
+    const recipesContainer = document.getElementById('recipes-container');
+    var noRecipesMessage = document.createElement("div");
+    noRecipesMessage.classList.add('flex', 'text-center', 'm-4', 'p-4')
 
-searchBar.addEventListener('input', updateFilter);
+    let image = document.createElement("img");
+    image.src = '/images/MeRecipesLogo.png';
+    image.classList.add("img-fluid");
+    image.alt = "Recipe Placeholder Image";
 
-// Initial filter
-updateFilter();
+    let paragraph = document.createElement("p");
+    paragraph.classList.add('my-2', 'py-2');
+    paragraph.textContent = "No recipes made yet. Make your first one now!";
+
+    let createBtn = document.createElement("a");
+    createBtn.setAttribute('href', '/recipe/create');
+    createBtn.classList.add("btn", "btn-primary");
+    createBtn.textContent = "Create your first recipe!";
+
+    noRecipesMessage.appendChild(image);
+    noRecipesMessage.appendChild(paragraph);
+    noRecipesMessage.appendChild(createBtn);
+
+    recipesContainer.appendChild(noRecipesMessage);
+}
 
 function updateFilter() {
     const taggedValues = Array.from(tagsFilters)
@@ -27,7 +56,7 @@ function updateFilter() {
 
     const prepTimeFilter = Array.from(prepTimeFilters)
         .filter(checkbox => checkbox.checked)
-        .map(checkbox => checkbox.value);
+        .map(checkbox => parseInt(checkbox.value));
 
     const searchValue = searchBar.value.trim().toLowerCase();
 
@@ -38,11 +67,7 @@ function updateFilter() {
 
         const nameMatch = name.includes(searchValue);
         const tagsMatch = taggedValues.every(filterValue => tags.includes(filterValue));
-        let prepTimeMatch = (prepTime <= prepTimeFilter);
-        if (!prepTimeFilter[0]) {
-            prepTimeMatch = true;
-        }
-
+        let prepTimeMatch = (prepTimeFilter.length === 0) || prepTimeFilter.includes(prepTime);
 
         return nameMatch && tagsMatch && prepTimeMatch;
     });
@@ -51,11 +76,22 @@ function updateFilter() {
 }
 
 function renderDefault(recipesData) {
+
+    const startIndex = (currentPage - 1) * recipesPerPage;
+    const endIndex = startIndex + recipesPerPage;
+    const recipesToRender = recipesData.slice(startIndex, endIndex);
+
     const recipesContainer = document.getElementById('recipes-container');
     recipesContainer.innerHTML = '';
-    recipesContainer.classList.add('row');
 
-    recipesData.forEach(recipe => {
+    let recipeRow;
+    recipesToRender.forEach((recipe, index) => {
+        if (index % 3 === 0) {
+            // Create a new row for every 3rd recipe
+            recipeRow = document.createElement('div');
+            recipeRow.classList.add('row');
+            recipesContainer.appendChild(recipeRow);
+        }
         const recipeObject = document.createElement('div');
         recipeObject.classList.add('col-lg-4', 'col-md-6', 'col-sm-12', 'mb-4');
 
@@ -123,9 +159,36 @@ function renderDefault(recipesData) {
         recipeCard.appendChild(cardFooter);
 
         recipeObject.appendChild(recipeCard);
-
-        recipesContainer.appendChild(recipeObject);
+        recipeRow.appendChild(recipeObject);
     });
+    renderPagination(recipesData.length);
 }
 
+function renderPagination(totalRecipes) {
+    const totalPages = Math.ceil(totalRecipes / recipesPerPage);
+    const paginationContainer = document.getElementById('pagination-container');
+    paginationContainer.innerHTML = '';
+
+    if (totalPages <= 1) {
+        // No need for pagination if there's only one page
+        return;
+    }
+
+    for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.textContent = i;
+        pageButton.classList.add('btn', 'btn-secondary', 'me-2');
+
+        if (i === currentPage) {
+            pageButton.classList.add('active');
+        }
+
+        pageButton.addEventListener('click', () => {
+            currentPage = i;
+            renderDefault(recipesData);
+        });
+
+        paginationContainer.appendChild(pageButton);
+    }
+}
 
